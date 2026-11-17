@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GRFS Tecnologia | Loja de Informática</title>
+<style>
+:root{--bg:#0b1020;--panel:#141e32;--border:#293954;--blue:#287bff;--cyan:#22c8e8;--text:#f5f7fb;--muted:#aab7ca}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.top{background:#070b14;color:#c2cee0;text-align:center;padding:8px;font-size:12px}
+header{position:sticky;top:0;z-index:10;background:#10182a;border-bottom:1px solid var(--border)}
+.head{max-width:1250px;margin:auto;padding:13px 16px;display:flex;align-items:center;gap:12px}
+.logo{font-size:22px;font-weight:900;white-space:nowrap}
+.logo span{color:var(--cyan)}
+.search{flex:1;min-width:100px}
+.search input{width:100%;padding:12px;border:1px solid var(--border);border-radius:9px;background:#1b2940;color:white}
+.btn{border:0;border-radius:8px;background:var(--blue);color:white;padding:11px 14px;font-weight:bold}
+.btn.secondary{background:#293954}
+main{max-width:1250px;margin:auto;padding:16px}
+.banner{background:linear-gradient(110deg,#102b52,#12404b);border:1px solid #275477;border-radius:12px;padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between}
+.banner h1{font-size:19px;margin:0 0 5px}
+.banner p{font-size:12px;color:#d3e3f4;margin:0}
+.banner strong{color:#55e1f4}
+h2{font-size:22px;margin:0}
+.catalog-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+select{background:var(--panel);color:white;border:1px solid var(--border);border-radius:8px;padding:10px}
+.categories{display:flex;gap:8px;overflow-x:auto;padding:3px 0 14px}
+.cat{white-space:nowrap;border:1px solid var(--border);border-radius:25px;background:var(--panel);color:white;padding:8px 13px}
+.cat.active{background:var(--blue);border-color:var(--blue)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:.2s}
+.card:hover{transform:translateY(-3px);border-color:var(--cyan)}
+.photo{height:175px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:contain;padding:8px}
+.info{padding:12px;display:flex;flex-direction:column;flex:1}
+.tag{font-size:10px;color:var(--cyan);font-weight:bold;text-transform:uppercase}
+.name{font-size:14px;line-height:1.4;margin:7px 0;min-height:39px}
+.description{font-size:11px;color:var(--muted);min-height:30px}
+.price{font-size:20px;font-weight:900;margin:12px 0 4px}
+.installment{font-size:11px;color:#aebdd1;margin-bottom:12px}
+.info button{width:100%;margin-top:auto}
+.empty{grid-column:1/-1;text-align:center;padding:35px;color:var(--muted)}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:25px 0}
+.trust div{background:var(--panel);border:1px solid var(--border);padding:15px;border-radius:10px;text-align:center;font-size:13px}
+footer{border-top:1px solid var(--border);text-align:center;color:var(--muted);padding:25px 15px;font-size:12px;line-height:1.8}
+.overlay{display:none;position:fixed;inset:0;background:#000b;z-index:30;align-items:center;justify-content:center;padding:14px}
+.overlay.show{display:flex}
+.modal{background:var(--panel);border:1px solid var(--border);border-radius:13px;padding:19px;width:min(560px,100%);max-height:90vh;overflow:auto}
+.modalhead{display:flex;justify-content:space-between;align-items:center}
+.modal h2{font-size:20px}
+.close{background:#293954;color:white;border:0;border-radius:7px;padding:8px}
+.line{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--border);font-size:13px}
+.line button{background:#713c45;color:white;border:0;border-radius:6px;padding:6px}
+.total{text-align:right;font-size:20px;font-weight:bold;margin:16px 0}
+.field{margin:12px 0}
+.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+.field input{width:100%;padding:11px;border:1px solid var(--border);border-radius:8px;background:#0b1324;color:white}
+.full{width:100%;margin-top:8px}
+.small{font-size:12px;color:var(--muted);line-height:1.5}
+@media(max-width:850px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:560px){
+ .head{flex-wrap:wrap;padding:10px}
+ .logo{font-size:19px}
+ .search{order:3;flex-basis:100%}
+ .head>.btn{font-size:11px;padding:9px}
+ main{padding:11px}
+ .banner{padding:12px}
+ .banner h1{font-size:16px}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .photo{height:120px}
+ .info{padding:9px}
+ .name{font-size:12px;min-height:35px}
+ .price{font-size:17px}
+ .trust{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="top">GRFS TECNOLOGIA • HARDWARE E COMPONENTES DE INFORMÁTICA</div>
+<header>
+ <div class="head">
+  <div class="logo">GRFS <span>TECNOLOGIA</span></div>
+  <div class="search"><input id="search" placeholder="Buscar produtos..." oninput="render()"></div>
+  <button class="btn secondary" onclick="openSeller()">Vendedor</button>
+  <button class="btn" onclick="openCart()">Carrinho (<span id="count">0</span>)</button>
+ </div>
+</header>
+
+<main>
+ <section class="banner">
+  <div>
+   <h1>Bem-vindo à <strong>GRFS Tecnologia</strong></h1>
+   <p>Encontre componentes para montar e atualizar seu computador.</p>
+  </div>
+  <div style="font-size:35px">💻</div>
+ </section>
+
+ <section>
+  <div class="catalog-head">
+   <h2>Todos os produtos</h2>
+   <select id="sort" onchange="render()">
+    <option value="default">Destaques</option>
+    <option value="asc">Menor preço</option>
+    <option value="desc">Maior preço</option>
+    <option value="name">Nome A-Z</option>
+   </select>
+  </div>
+  <div class="categories" id="categories"></div>
+  <div class="grid" id="products"></div>
+ </section>
+
+ <section class="trust">
+  <div>🔒 <strong>Ambiente seguro</strong><br><span class="small">Atendimento GRFS Tecnologia</span></div>
+  <div>📦 <strong>Componentes</strong><br><span class="small">Hardware e informática</span></div>
+  <div>💬 <strong>Atendimento</strong><br><span class="small">Fale com nossa equipe</span></div>
+ </section>
+</main>
+
+<footer>
+ <strong>GRFS Tecnologia</strong><br>
+ E-mail: grfstecnologia@gmail.com<br>
+ CNPJ: 49.317.848/0001-38<br>
+ © <span id="year"></span> GRFS Tecnologia
+</footer>
+
+<div class="overlay" id="cartModal">
+ <div class="modal">
+  <div class="modalhead"><h2>Meu carrinho</h2><button class="close" onclick="closeModal('cartModal')">Fechar</button></div>
+  <div id="cartItems"></div>
+  <div class="total" id="total"></div>
+  <button class="btn full" onclick="checkout()">Finalizar pelo WhatsApp</button>
+ </div>
+</div>
+
+<div class="overlay" id="sellerModal">
+ <div class="modal">
+  <div class="modalhead"><h2>Área do vendedor</h2><button class="close" onclick="closeModal('sellerModal')">Fechar</button></div>
+  <div id="login">
+   <p class="small">Acesso demonstrativo.</p>
+   <div class="field"><label>Usuário</label><input id="user" placeholder="Usuário"></div>
+   <div class="field"><label>Senha</label><input id="pass" type="password" placeholder="Senha"></div>
+   <button class="btn full" onclick="login()">Entrar</button>
+   <p class="small">Usuário: admin | Senha: grfs2026</p>
+  </div>
+  <div id="dashboard" style="display:none">
+   <h3>Registrar venda</h3>
+   <div class="field"><label>Cliente</label><input id="customer" placeholder="Nome do cliente"></div>
+   <div class="field"><label>Produto</label><input id="saleProduct" placeholder="Produto vendido"></div>
+   <div class="field"><label>Valor</label><input id="saleValue" type="number" min="0" step="0.01" placeholder="0,00"></div>
+   <button class="btn full" onclick="addSale()">Salvar venda</button>
+   <h3>Histórico</h3>
+   <div id="history"></div>
+   <button class="btn secondary full" onclick="logout()">Sair</button>
+   <p class="small">Painel demonstrativo: os registros ficam apenas neste navegador. Não há integração de pagamento ou autenticação segura.</p>
+  </div>
+ </div>
+</div>
+
+<script>
+const products=[
+{id:1,n:"Processador Intel Core i5",c:"Processadores",p:899.90,d:"Processador para computadores e jogos.",img:"https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=600"},
+{id:2,n:"Processador AMD Ryzen 5",c:"Processadores",p:799.90,d:"Desempenho para produtividade e jogos.",img:"https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=600"},
+{id:3,n:"Memória RAM DDR4 16GB",c:"Memórias",p:249.90,d:"Memória para upgrade do computador.",img:"https://images.unsplash.com/photo-1562976540-1502c2145186?w=600"},
+{id:4,n:"Memória RAM DDR5 16GB",c:"Memórias",p:389.90,d:"Nova geração de memória.",img:"https://images.unsplash.com/photo-1562976540-1502c2145186?w=600"},
+{id:5,n:"SSD 480GB SATA",c:"Armazenamento",p:199.90,d:"Armazenamento rápido e eficiente.",img:"https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=600"},
+{id:6,n:"SSD NVMe 1TB",c:"Armazenamento",p:429.90,d:"Alta velocidade para seu computador.",img:"https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=600"},
+{id:7,n:"Placa de vídeo 8GB",c:"Placas de vídeo",p:1399.90,d:"Mais desempenho gráfico para jogos.",img:"https://images.unsplash.com/photo-1591488320449-011701bb6704?w=600"},
+{id:8,n:"Placa-mãe Intel",c:"Placas-mãe",p:499.90,d:"Base para montagem do computador.",img:"https://images.unsplash.com/photo-1518770660439-4636190af475?w=600"},
+{id:9,n:"Placa-mãe AMD",c:"Placas-mãe",p:549.90,d:"Compatível com processadores AMD.",img:"https://images.unsplash.com/photo-1518770660439-4636190af475?w=600"},
+{id:10,n:"Fonte 650W",c:"Fontes",p:349.90,d:"Alimentação para configurações robustas.",img:"https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=600"},
+{id:11,n:"Gabinete Gamer",c:"Gabinetes",p:299.90,d:"Design moderno para seu setup.",img:"https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=600"},
+{id:12,n:"Water Cooler 240mm",c:"Refrigeração",p:399.90,d:"Refrigeração líquida para seu computador.",img:"https://images.unsplash.com/photo-1587202372616-b43abea06c2a?w=600"},
+{id:13,n:"Mouse Gamer",c:"Periféricos",p:79.90,d:"Precisão e conforto.",img:"https://images.unsplash.com/photo-1527814050087-3793815479db?w=600"},
+{id:14,n:"Teclado Mecânico",c:"Periféricos",p:219.90,d:"Teclas mecânicas para digitação.",img:"https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600"},
+{id:15,n:"Monitor 24 polegadas",c:"Monitores",p:699.90,d:"Tela ampla para trabalho e jogos.",img:"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600"},
+{id:16,n:"Pasta térmica",c:"Acessórios",p:29.90,d:"Auxilia na transferência de calor.",img:"https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=600"}
+];
+let category="Todos";
+let cart=JSON.parse(localStorage.getItem("grfs_cart")||"[]");
+let sales=JSON.parse(localStorage.getItem("grfs_sales")||"[]");
+const money=n=>Number(n).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+document.getElementById("year").textContent=new Date().getFullYear();
+
+function categories(){
+ const all=["Todos",...new Set(products.map(p=>p.c))];
+ document.getElementById("categories").innerHTML=all.map(c=>`<button class="cat ${category===c?"active":""}" onclick="setCategory('${c}')">${c}</button>`).join("");
+}
+function setCategory(c){category=c;categories();render()}
+function render(){
+ const q=document.getElementById("search").value.toLowerCase();
+ let arr=products.filter(p=>(category==="Todos"||p.c===category)&&(p.n.toLowerCase().includes(q)||p.c.toLowerCase().includes(q)));
+ const sort=document.getElementById("sort").value;
+ if(sort==="asc")arr.sort((a,b)=>a.p-b.p);
+ if(sort==="desc")arr.sort((a,b)=>b.p-a.p);
+ if(sort==="name")arr.sort((a,b)=>a.n.localeCompare(b.n));
+ document.getElementById("products").innerHTML=arr.length?arr.map(p=>`
+ <article class="card">
+  <div class="photo"><img src="${p.img}" alt="${p.n}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x400/f1f3f7/28364a?text=GRFS+Tecnologia'"></div>
+  <div class="info">
+   <span class="tag">${p.c}</span>
+   <div class="name"><strong>${p.n}</strong></div>
+   <div class="description">${p.d}</div>
+   <div class="price">${money(p.p)}</div>
+   <div class="installment">Preço de referência • Consulte disponibilidade</div>
+   <button class="btn" onclick="addCart(${p.id})">Adicionar ao carrinho</button>
+  </div>
+ </article>`).join(""):'<div class="empty">Nenhum produto encontrado.</div>';
+}
+function saveCart(){localStorage.setItem("grfs_cart",JSON.stringify(cart));document.getElementById("count").textContent=cart.reduce((s,x)=>s+x.qty,0)}
+function addCart(id){let item=cart.find(x=>x.id===id);if(item)item.qty++;else cart.push({id,qty:1});saveCart();alert("Produto adicionado ao carrinho!")}
+function openCart(){renderCart();document.getElementById("cartModal").classList.add("show")}
+function renderCart(){
+ let el=document.getElementById("cartItems");
+ if(!cart.length){el.innerHTML='<p class="small">Seu carrinho está vazio.</p>';document.getElementById("total").textContent="Total: R$ 0,00";return}
+ el.innerHTML=cart.map(i=>{let p=products.find(x=>x.id===i.id);return `<div class="line"><span>${i.qty}x ${p.n}<br>${money(p.p*i.qty)}</span><button onclick="removeCart(${i.id})">Remover</button></div>`}).join("");
+ document.getElementById("total").textContent="Total: "+money(cart.reduce((s,i)=>s+products.find(p=>p.id===i.id).p*i.qty,0));
+}
+function removeCart(id){cart=cart.filter(i=>i.id!==id);saveCart();renderCart()}
+function checkout(){
+ if(!cart.length){alert("Carrinho vazio.");return}
+ const lines=cart.map(i=>{let p=products.find(x=>x.id===i.id);return `${i.qty}x ${p.n} - ${money(p.p*i.qty)}`});
+ const total=cart.reduce((s,i)=>s+products.find(p=>p.id===i.id).p*i.qty,0);
+ const message="Olá! Gostaria de consultar este pedido na GRFS Tecnologia:\n"+lines.join("\n")+"\nTotal de referência: "+money(total);
+ window.open("https://wa.me/?text="+encodeURIComponent(message),"_blank");
+}
+function openSeller(){document.getElementById("sellerModal").classList.add("show")}
+function closeModal(id){document.getElementById(id).classList.remove("show")}
+function login(){
+ if(document.getElementById("user").value==="admin"&&document.getElementById("pass").value==="grfs2026"){
+ document.getElementById("login").style.display="none";document.getElementById("dashboard").style.display="block";renderSales();
+ }else alert("Usuário ou senha incorretos.");
+}
+function logout(){document.getElementById("dashboard").style.display="none";document.getElementById("login").style.display="block"}
+function addSale(){
+ const customer=document.getElementById("customer").value.trim(),product=document.getElementById("saleProduct").value.trim(),value=Number(document.getElementById("saleValue").value);
+ if(!customer||!product||!value||value<=0){alert("Preencha todos os campos corretamente.");return}
+ sales.push({customer,product,value,date:new Date().toLocaleString("pt-BR")});
+ localStorage.setItem("grfs_sales",JSON.stringify(sales));
+ document.getElementById("customer").value="";document.getElementById("saleProduct").value="";document.getElementById("saleValue").value="";
+ renderSales();alert("Venda registrada!");
+}
+function renderSales(){
+ document.getElementById("history").innerHTML=sales.length?sales.map(s=>`<div class="line"><span>${s.date}<br>${s.customer} — ${s.product}</span><strong>${money(s.value)}</strong></div>`).join(""):'<p class="small">Nenhuma venda registrada.</p>';
+}
+document.querySelectorAll(".overlay").forEach(el=>el.addEventListener("click",e=>{if(e.target===el)el.classList.remove("show")}));
+categories();render();saveCart();
+</script>
+</body>
+</html>
